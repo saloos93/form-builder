@@ -7,23 +7,21 @@ import { useState } from "react";
 
 const FormBuilder = ({ title, formElements }) => {
   const ids = {};
-  //const [form, setForm] = useState({ firstname: "", lastname: "", age: "" });
+  const [formData, setFormData] = useState({});
 
   const handelSubmit = (e) => {
     e.preventDefault();
     for (const key in ids) {
       console.log(key, e.target[key]?.value);
     }
-    // console.log(ids.map((item) => e.target[item]?.value));
   };
 
-  const renderForm = () => {
-    let formUI = formElements.map((m) => {
-      let type = m.type || "text";
-      let props = m.props || {};
+  const RenderForm = () => {
+    const formUI = formElements.map((m) => {
+      const props = m.props || {};
       ids[m.id] = undefined;
 
-      switch (type) {
+      switch (m.type) {
         case "text":
         case "number":
           return (
@@ -31,7 +29,7 @@ const FormBuilder = ({ title, formElements }) => {
               <Input
                 id={m.id}
                 label={m.label}
-                type={type}
+                type={m.type}
                 placeHolder={m.placeHolder}
                 props={m.props}
               />
@@ -44,7 +42,7 @@ const FormBuilder = ({ title, formElements }) => {
               <Checkbox
                 id={m.id}
                 label={m.label}
-                type={type}
+                type={m.type}
                 options={m.options}
               />
             </div>
@@ -55,7 +53,7 @@ const FormBuilder = ({ title, formElements }) => {
               <Radio
                 id={m.id}
                 label={m.label}
-                type={type}
+                type={m.type}
                 options={m.options}
               />
             </div>
@@ -66,7 +64,7 @@ const FormBuilder = ({ title, formElements }) => {
               <Select
                 id={m.id}
                 label={m.label}
-                type={type}
+                type={m.type}
                 options={m.options}
               />
             </div>
@@ -74,7 +72,7 @@ const FormBuilder = ({ title, formElements }) => {
         case "file":
           return (
             <div className="form-group" key={m.key}>
-              <File id={m.id} label={m.label} type={type} />
+              <File id={m.id} label={m.label} type={m.type} />
             </div>
           );
 
@@ -89,7 +87,7 @@ const FormBuilder = ({ title, formElements }) => {
     <div className="form">
       <h1>{title}</h1>
       <form onSubmit={(e) => handelSubmit(e)} className="dynamic-form">
-        {renderForm()}
+        {RenderForm()}
         <div className="form-actions">
           <button type="submit">submit</button>
         </div>
