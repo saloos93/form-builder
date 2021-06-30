@@ -1,4 +1,4 @@
-export default function Select({ key, id, label, type, options }) {
+export default function Select({ id, label, type, options }) {
   return (
     <>
       <label className="form-label" htmlFor={label}>

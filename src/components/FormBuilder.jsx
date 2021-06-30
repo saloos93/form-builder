@@ -3,16 +3,25 @@ import Checkbox from "./Elements/Checkbox";
 import Select from "./Elements/Select";
 import Radio from "./Elements/Radio";
 import File from "./Elements/File";
+import { useState } from "react";
 
 const FormBuilder = ({ title, formElements }) => {
+  const ids = {};
+  //const [form, setForm] = useState({ firstname: "", lastname: "", age: "" });
+
   const handelSubmit = (e) => {
     e.preventDefault();
+    for (const key in ids) {
+      console.log(key, e.target[key]?.value);
+    }
+    // console.log(ids.map((item) => e.target[item]?.value));
   };
 
   const renderForm = () => {
     let formUI = formElements.map((m) => {
       let type = m.type || "text";
       let props = m.props || {};
+      ids[m.id] = undefined;
 
       switch (type) {
         case "text":
@@ -20,7 +29,6 @@ const FormBuilder = ({ title, formElements }) => {
           return (
             <div className="form-group" key={m.key}>
               <Input
-                elementType={m.elementType}
                 id={m.id}
                 label={m.label}
                 type={type}

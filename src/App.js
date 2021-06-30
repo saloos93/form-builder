@@ -34,12 +34,14 @@ function App() {
       type: "radio",
       options: [
         {
+          id: "male",
           key: "male",
           label: "Male",
           name: "gender",
           value: "male",
         },
         {
+          id: "female",
           key: "female",
           label: "Female",
           name: "gender",
@@ -63,6 +65,7 @@ function App() {
       key: "6",
       label: "City :",
       type: "select",
+      id: "select",
       value: "tehran",
       options: [
         { key: "tehran", label: "Tehran", value: "tehran" },
@@ -74,6 +77,7 @@ function App() {
       key: "file",
       label: "file :",
       type: "file",
+      id: "file",
     },
   ];
   return (
